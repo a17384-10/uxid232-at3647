@@ -12,6 +12,6 @@ declare(strict_types=1);
     ?>
 </head>
 <body>
-   
+   <h1><?php echo $welcome_message; ?></h1>
 </body>
 </html>
