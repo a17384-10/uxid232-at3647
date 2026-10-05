@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$welcome_message = "uxid 232 coo";
+$welcome_message = "uxid 232 coo — welcome to my cookbook !";
 ?>
 <!DOCTYPE html>
 <html lang="en">
