@@ -13,10 +13,10 @@ $is_submitted = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $is_submitted = true;
 
-    // 1. Extract and normalize raw input
+    // extracts and sanitizes the recipe name from the POST request
     $recipe_name = trim($_POST['recipe_name'] ?? '');
 
-    // 2. Server-side Validation (independent of client HTML attributes)
+    // checks if the box was left empty or if the recipe name is within the rules
     if ($recipe_name === '') {
         $error = 'Recipe name is required.';
     } elseif (mb_strlen($recipe_name) < 3 || mb_strlen($recipe_name) > 100) {
@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <h1>Cookbook: Add New Recipe</h1>
-
+ 
+  <!-- AI used for the following code: Gemini -->
   <?php if ($is_submitted && $error === ''): ?>
     <div style="padding: 10px; background-color: #ffd2f2ff; border: 1px solid #ae0071ff; margin-bottom: 20px;">
       <p><strong>Success!</strong> Saved recipe: <?= sanitize_output($recipe_name) ?></p>
