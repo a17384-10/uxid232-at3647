@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <h1>Cookbook: Add New Recipe</h1>
 
   <?php if ($is_submitted && $error === ''): ?>
-    <div style="padding: 10px; background-color: #e6fffa; border: 1px solid #38b2ac; margin-bottom: 20px;">
+    <div style="padding: 10px; background-color: #ffd2f2ff; border: 1px solid #ae0071ff; margin-bottom: 20px;">
       <p><strong>Success!</strong> Saved recipe: <?= sanitize_output($recipe_name) ?></p>
     </div>
   <?php endif; ?>
