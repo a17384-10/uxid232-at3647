@@ -29,10 +29,10 @@ try {
     <title>My Cookbook - Recipes</title>
     <style>
         body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
-        .recipe-card { border: 1px solid #ddd; border-radius: 6px; padding: 20px; margin-bottom: 20px; background: #fafafa; }
-        .recipe-card h2 { margin-top: 0; color: #2c3e50; }
-        .meta { font-size: 0.9rem; color: #666; margin-bottom: 10px; }
-        .error { color: #c0392b; background: #fadbd8; padding: 10px; border-radius: 4px; }
+        .recipe-card { border: 1px solid #ffecffff; border-radius: 6px; padding: 20px; margin-bottom: 20px; background: #eefffdff; }
+        .recipe-card h2 { margin-top: 0; color: #e404acff; }
+        .meta { font-size: 0.9rem; color: #980f71ff; margin-bottom: 10px; }
+        .error { color: #c02b2bff; background: #fad8d8ff; padding: 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
