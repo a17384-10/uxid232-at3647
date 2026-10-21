@@ -56,3 +56,5 @@ node_modules
 presentations/images
 tests/answer_key
 z-archive
+.DS_Store
+alpha/config.php

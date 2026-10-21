@@ -1,0 +1,44 @@
+IDM232 recipe data
+"40 recipes from the professor's PDFs (pdf1.zip + pdf2.zip), with the gaps filled in by AI. Every PDF-sourced value was checked against the PDFs."
+
+"The sheets, in order"
+"recipes_flat: everything about a recipe on one row, enough to build the whole site from this sheet alone: text, ingredient list, tool (name, brand, description, photos), tip, every step with its photos, and every image path. It is built from the other sheets."
+recipes: one row per recipe. recipe_id is the primary key; slug is the URL name for your PHP pages and the name of the recipe's image folder.
+"ingredients: one row per ingredient line, linked by recipe_id. sort_order keeps the list order. quantity, unit and name split the line; full_text is the line as printed."
+"steps: one row per cooking step, linked by recipe_id and ordered by step_number."
+"tools: each kitchen tool once, with brand, description and up to 3 photos (image, image_2, image_3)."
+recipe_tools: links each recipe to its tool (recipe_id + tool_id).
+"images: every picture the site uses (dish, all-ingredients photo, step photos, tip pictures, tool photos), labeled, with its original file name."
+"extra_images: every file parked in an extras/ folder (single-ingredient photos, tip thumbnails, wine labels, website graphics, duplicate downloads). Not used by the site; kept so nothing is lost."
+"tips: the tip each recipe page shows (one per recipe at most), with its picture. tip_type is how_to (print ""How To: "" before the title) or ingredient_spotlight."
+"data_notes: what each PDF was missing and what was done about it. Use it for your README's ""AI use"" section; not a database table."
+Gray italic recipe_title / tool_name columns are only there to make browsing easier; leave them out of the SQL tables.
+
+AI-filled data
+"The PDFs were printed from web pages, and content that fell on a page break was dropped. Your professor said to fill the gaps yourself or with AI, so the gaps are filled."
+"Filled by AI: 135 ingredient lines, 71 step titles, 18 whole steps (including 3 recipes that only had a title and description), one description, and tools for those 3 recipes."
+"The source column on ingredients, steps and recipe_tools says where each row came from: pdf, ai, or pdf+ai_title (PDF instructions with an AI-written title)."
+"AI ingredient quantities are estimates based on the steps and the serving size. That is handy for your README's ""AI use"" section."
+"category (main protein) and servings were added to recipes for filtering. servings comes from the photo file codes (FP = family plan, 4 servings; 2P = 2 servings)."
+"The ""kitchen tools"" are the products each recipe page promoted, not a complete list of equipment."
+
+Images
+Paths start with images/ and match the images-renamed folder made by rename_map_v2.csv (rename it to images and put it next to your PHP files).
+"Each recipe folder (named after its slug) holds exactly the pictures its PDF shows: dish.jpg, ingredients.png, step-1.jpg (step-1@2x.jpg is the retina version), tip.jpg, tool-1.jpg / tool-2.jpg. images/tools/ has one copy of each tool's photos for the tools table. Everything else is in the recipe's extras/ folder under its original name."
+"Step, tip and tool pictures were matched to the PDF pictures pixel by pixel. Spicy Pork uses one photo for steps 4 and 6, as its PDF does; Tuscan step 5 has no photo. The 3 recipes with no steps in their PDFs had their photos ordered by eye and their AI steps adjusted to fit."
+
+For SQL and PHP
+"Primary keys: recipes.recipe_id, ingredients.ingredient_id, steps.step_id, tools.tool_id, tips.tip_id, images.image_id. recipe_tools uses (recipe_id, tool_id) together."
+"Foreign keys: ingredients, steps, tips, images and recipe_tools point at recipes.recipe_id; recipe_tools.tool_id points at tools.tool_id."
+"A recipe page: look up the recipe by slug, then pull its ingredients (ORDER BY sort_order), steps (ORDER BY step_number), tip and tool by recipe_id."
+"Search and filter: title, subtitle, description and ingredients.name are the text to search; category is the filter."
+"quantity is display text (""1½""), not a number."
+"recipes_flat, extra_images and data_notes are for reading, not importing."
+
+Version history
+"ver3: audited against the PDFs; fixed Seared Steaks step 3 source, General Tso's step 2 period, added Pimento's Sweet Potato tip."
+ver4: step photos put in PDF order by pixel matching.
+"ver5: clean image names; tool and tip pictures matched to the PDFs; the 3 photo-only recipes use the Large Maple Cutting Board, the tool in their folders."
+"ver6: removed empty columns, straight quotes, tip_type, needs_review renamed data_notes."
+"ver7: plain tool_images paths, image labels, cells sized to their contents."
+"ver8: images holds only pictures the site uses, the rest moved to extra_images; recipes_flat rebuilt with tool brand, tool description, tip_type and ingredient_count so it covers the whole site; sheets reordered."
