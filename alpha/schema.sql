@@ -1,7 +1,5 @@
--- Drop the table if it already exists to ensure a fresh setup
 DROP TABLE IF EXISTS recipes;
 
--- Create the recipes table with all necessary columns for the Alpha milestone
 CREATE TABLE recipes (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -13,7 +11,6 @@ CREATE TABLE recipes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Insert the 5 seed recipes with the '../' image paths for a nested folder structure
 INSERT INTO recipes (id, title, subtitle, category, servings, description, image) VALUES
 (1, 'Ancho-Orange Chicken', 'with Kale Rice & Roasted Carrots', 'Chicken', 4, 'We\'re amping up chicken breasts with a glaze of smoky ancho chile paste and fresh orange juice in this recipe. On the side, roasted carrots and lightly creamy, golden raisin-studded rice perfectly accent the sweetness of the glaze.', '../images-renamed/ancho-orange-chicken/dish.jpg'),
 (2, 'Beef Medallions & Mushroom Sauce', 'with Mashed Potatoes', 'Beef', 2, 'In this easy recipe, inspired by steak Diane (an American restaurant classic), we\'re searing beef medallions, then using the fond in the pan to make a rich, bright mushroom sauce for spooning on top. Garlic mashed potatoes and sautéed kale make for delicious, simple sides.', '../images-renamed/beef-medallions-mushroom-sauce/dish.jpg'),
